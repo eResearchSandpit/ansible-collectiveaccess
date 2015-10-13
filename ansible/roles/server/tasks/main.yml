@@ -10,6 +10,7 @@
     - curl
     - wget
     - python-software-properties
+    - git
 
 - name: Install Extra Packages
   sudo: yes
@@ -17,15 +18,15 @@
   with_items: server.packages
   when: server.packages is defined
 
-- name: Configure the timezone
-  sudo: yes
-  template: src=timezone.tpl dest=/etc/timezone
 
-- name: More Configure the timezone
-  sudo: yes
-  file: src=/usr/share/zoneinfo/{{server.timezone}} dest=/etc/localtime state=link force=yes backup=yes
-
-- name: Set default system language pack
-  shell: locale-gen {{server.locale}}
-  sudo: yes
-
+# - name: Configure the timezone
+#   sudo: yes
+#   template: src=timezone.tpl dest=/etc/timezone
+#
+# - name: More Configure the timezone
+#   sudo: yes
+#   file: src=/usr/share/zoneinfo/{{server.timezone}} dest=/etc/localtime state=link force=yes backup=yes
+#
+# - name: Set default system language pack
+#   shell: locale-gen {{server.locale}}
+#   sudo: yes

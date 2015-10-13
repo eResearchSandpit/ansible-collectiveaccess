@@ -1,11 +1,12 @@
 ---
-- hosts: all
+- hosts: ca
+  user: ubuntu
   sudo: true
   vars_files:
     - vars/all.yml
   roles:
     - server
-    - vagrant_local
+    # - vagrant_local
     - nginx
     - mysql
     - php

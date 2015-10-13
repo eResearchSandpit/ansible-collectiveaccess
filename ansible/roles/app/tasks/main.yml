@@ -4,18 +4,39 @@
 # - name: Install git
 #  apt: name=git state=latest
 
-#- name: Clone Collective Access
-  # git: >
-  #  repo=https://github.com/collectiveaccess/providence
-  #  dest=/vagrant
-  #  update=no
+- name: Clone Collective Access
+  git: >
+   repo=https://github.com/collectiveaccess/providence
+   dest=/opt/vic-ca
+   update=no
 
 - name: Configure setup.php
   sudo: yes
-  template: src=setup.tpl dest=/vagrant/setup.php
+  template: src=setup.tpl dest=/opt/vic-ca/setup.php
 
 - name: Set permissions on app/tmp
-  command: chmod +w /vagrant/app/tmp
+  file: path=/opt/vic-ca/app/tmp state=directory owner=www-data group=www-data mode=775
 
 - name: Set permissions on vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache
-  command: chmod +w /vagrant/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache
+  file: >
+   path=/opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache
+   state=directory
+   owner=www-data
+   group=www-data
+   mode=775
+
+- name: Set permissions on /opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer 
+  file: >
+   path=/opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
+   state=directory
+   owner=www-data
+   group=www-data
+   mode=775
+
+- name: Set permissions on media
+  file: path=/opt/vic-ca/media state=directory owner=www-data group=www-data mode=755
+# - name: Set permissions on app/tmp
+#   command: chmod +w /opt/vic-ca/app/tmp
+#
+# - name: Set permissions on vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache
+#   command: chmod +w /opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache

@@ -16,4 +16,3 @@
 
 - include: mod-php.yml
   when: modphp.stat.exists
-

@@ -8,8 +8,8 @@ vagrant_local:
     vm: { base_box: trusty64, hostname: collectiveaccess, ip: 192.168.2.145, memory: '512', sharedfolder: ~/workspace/collective_access, useVagrantCloud: '1', syncType: nfs }
 nginx:
     install: '1'
-    docroot: /vagrant
-    servername: collectiveaccess.local
+    docroot: /opt/vic-ca
+    servername: "{{ inventory_hostname }}"
 mysql:
     install: '1'
     root_password: root
@@ -25,4 +25,3 @@ xdebug:
     install: '1'
 composer:
     install: '1'
-
