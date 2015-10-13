@@ -9,6 +9,7 @@
    repo=https://github.com/collectiveaccess/providence
    dest=/opt/vic-ca
    update=no
+   version=release-1.5
 
 - name: Configure setup.php
   sudo: yes
@@ -25,7 +26,7 @@
    group=www-data
    mode=775
 
-- name: Set permissions on /opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer 
+- name: Set permissions on /opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
   file: >
    path=/opt/vic-ca/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
    state=directory
