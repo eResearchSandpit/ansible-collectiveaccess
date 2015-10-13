@@ -13,13 +13,10 @@ This project provides [Ansible](http://www.ansible.com) provisinioning for easy/
 
 ### Requirements
 
-You will need a working installation of [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.ansible.com) on your machine.
+You will need a working installation of [Ansible](http://www.ansible.com) on your machine and a remote server somewhere.  Currently the script only works for ubuntu VMs. Ubuntu instances on AWS work well.
 
 ### What is in the box?
 
-- Ubuntu Trusty Thar 14.04
-- 512Mb RAM
-- NGinX based
 - PHP 5.6 with a few required extensions
 - MySQL database
 
@@ -29,27 +26,31 @@ Clone this repository to your local machine (we assume you have a dedicated work
 
 ```bash
 cd ~/Workspace
-git clone https://github.com/netsensei/ansible-collectiveaccess
+git clone https://github.com/andre-geldenhuis/ansible-collectiveaccess
+git checkout remote_server
 ```
 
-Also, clone the [Providence](https://github.com/collectiveaccess/providence) repository to your Workspace folder
+### Setup hosts file
+
+Create a keys directory and copy your SSH key there. If you are just using ansible to setup one server, you can create a hosts file to point at your remote server.  
+
+#### hosts
 
 ```bash
-git clone https://github.com/collectiveaccess/providence ~/Workspace/collective_access
+[ca]
+52.xx.xx.xx ansible_ssh_private_key_file=keys/yourSSHkey.pem
 ```
 
-Now, go back to the Ansible folder and start Vagrant. Ansible should automatically start provisioning the box with all the necessary dependencies for CollectiveAccess.
+### Run the ansible playbook
+
+Now, go back to the Ansible folder and run the playbook. Ansible should automatically start provisioning the box with all the necessary dependencies for CollectiveAccess.
 
 ```bash
-cd ~/Workspace/ansible-collectiveaccess
-vagrant up
+ansible-playbook -i playbook.yml
 ```
-
 ## Usage
 
-Out of the box, NGinX listens on IP address `192.168.2.145`. Alternatively, you could create an entry in your `/etc/hosts` file that points to `collectiveaccess.local`.
-
-Open up your browser and navigate to either the IP address or the local domain. First time, you will be welcomed by the Providence installer.
+Open up your browser and navigate to either the IP address or domain of the remote server. First time, you will be welcomed by the Providence installer.
 
 ## Documentation
 
